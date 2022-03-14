@@ -1,0 +1,38 @@
+{
+  "hashtags":  [
+    {
+      "id": "1",
+      "display": "#india"
+    },
+    {
+      "id": "2",
+      "display": "#indianArmy"
+    },
+    {
+      "id": "3",
+      "display": "#indianCricket"
+    },
+    {
+      "id": "4",
+      "display": "#time"
+    }
+  ],
+  "users"  :[
+    {
+      "id": "1",
+      "display": "Amit"
+    },
+    {
+      "id": "2",
+      "display": "Deepak"
+    },
+    {
+      "id": "3",
+      "display": "Rohan"
+    },
+    {
+      "id": "4",
+      "display": "Sunil"
+    }
+  ]
+}
