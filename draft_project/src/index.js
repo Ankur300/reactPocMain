@@ -3,9 +3,12 @@ import { render } from "react-dom";
 import { MentionsInput, Mention } from "react-mentions";
 import DateTimePicker from 'react-datetime-picker';
 import Linkify from "./Linkify";
+import ASearch from "./advancesearch";
+import { BrowserRouter as Router,Route, Routes, Switch } from "react-router-dom";
 
 
 import ReactHashtag from "react-hashtag";
+import { Component } from "react";
 
 //import { render } from 'preact';
 
@@ -91,6 +94,11 @@ class App extends React.Component {
     });
   };
 
+  handleSaveComment = e => {
+   console.log(this.state.comments)
+  };
+  
+
   handleSubmitComment = e => {
     e.preventDefault();
  console.log(this.state.comment)
@@ -160,6 +168,42 @@ this.setState({
     const { comments, comment } = this.state;
     return (
       <div>
+       <Router>
+<div>
+
+
+
+
+
+{/* <h1>Welcome to routing</h1>
+<li><Link to ="/">Home</Link></li>
+<li><Link to ="/contact">Contact us </Link></li>
+<li><Link to ="/Registration">Registration</Link></li>
+<li><Link to ="/allplayer">AllPlayer</Link></li> 
+<li><Link to ="/login">Login</Link></li>  */}
+
+
+
+
+
+
+
+
+<Switch>
+
+<Route exact path="/search" component={ASearch}/>
+
+
+
+</Switch>
+
+
+
+
+</div>
+
+
+  </Router>
         <span>
 
 
@@ -181,8 +225,15 @@ this.setState({
          </MentionsInput>
 
         <button onClick={this.handleSubmitComment}>Comment</button>
+        <button onClick={this.handleSaveComment}>Save</button>      
+        <div></div>
+        <br/>
+        <br/>
+<div></div>
+<div></div>
+<div></div>
       </div>
-      
+  
     );
     
   }

@@ -1,5 +1,5 @@
 {
-  "hashtags":  [
+  "hashtags": [
     {
       "id": "1",
       "display": "#india"
@@ -15,9 +15,13 @@
     {
       "id": "4",
       "display": "#time"
+    },
+    {
+      "id": "6",
+      "display": "#dd"
     }
   ],
-  "users"  :[
+  "users": [
     {
       "id": "1",
       "display": "Amit"
@@ -33,6 +37,23 @@
     {
       "id": "4",
       "display": "Sunil"
+    }
+  ],
+  "comments": [
+    {
+      "id": "112",
+      "isChecked": 1,
+      "comment": "Amit"
+    },
+    {
+      "id": "113",
+      "isChecked": 0,
+      "comment": "Atul"
+    },
+    {
+      "id": "114",
+      "isChecked": 0,
+      "comment": "Atul #Football"
     }
   ]
 }
