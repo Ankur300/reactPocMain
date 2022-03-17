@@ -1,12 +1,6 @@
 
 import { useState, useEffect } from 'react';
 import './advancesearch.css';
-
-
-
-
-
-
 function ASearch() {
   // State
   const [apiData, setApiData] = useState({});
@@ -15,29 +9,24 @@ function ASearch() {
   var abc=[];
   const [def,setdef]=useState({});
 
-  const apiUrl = `http://localhost:3010/hashtags/`;
+  const apiUrl = `http://localhost:3010/comments/`;
   // Side effect
   useEffect(() => {
     fetch(apiUrl)
       .then((res) => res.json())
       .then((data) => setApiData(data)).then((apiData) => setdef(apiData=>apiData))
   }, [apiUrl,state]);
-
   const inputHandler = (event) => {
     setGetState(event.target.value);
   };
-
   const submitHandler = () => {
     setState(getState);
- 
+    //console.log(getState)
    // console.log(apiData.filter(api1=>api1.display.includes(getState)));
- 
-    abc=apiData.filter(api1=>api1.display.includes(getState))
- 
-    //console.log(abc.map(apd=>apd.display));
-    setdef((abc.map(apd=>apd.display)));
-    //console.log(def)
-        
+    abc=apiData.filter(api1=>api1.comment.includes(getState))
+    console.log(abc.map(apd=>apd.comment));
+    setdef((abc.map(apd=>apd.comment)));
+   // console.log(def)
   };
 
   
