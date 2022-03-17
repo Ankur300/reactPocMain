@@ -32,6 +32,7 @@ const hashtags = [
   }
 ];
 
+
 const users = [
   {
     id: "1",
@@ -51,6 +52,13 @@ const users = [
   }
 ];
 
+const comments1= [
+  {
+    "id": "112",
+    "isChecked": 1,
+    "comment": "Amit"
+  },
+]
 function Datepicker(props) {
   const [value, onChange] = useState(new Date());
 
@@ -94,9 +102,56 @@ class App extends React.Component {
     });
   };
 
-  handleSaveComment = e => {
-   console.log(this.state.comments)
-  };
+ 
+
+
+ handleSaveComment = async(e)=>{
+         e.preventDefault();
+         const {id,display}=hashtags;
+         
+         console.log(hashtags);
+
+         const red=await fetch("http://localhost:3010/hashtags",{
+          method:'POST',
+        headers:{
+            "content-type":'application/json'
+        },
+        body:JSON.stringify({id: "45",
+        display: "Sunil12"
+        })
+
+      })
+
+      const red1=await fetch("http://localhost:3010/comments",{
+        method:'POST',
+      headers:{
+          "content-type":'application/json'
+      },
+      body:JSON.stringify({id: "118",
+      isChecked: 0,
+      comment: "Ankit #Football"
+      })
+
+    })
+
+
+         /*  const res=await fetch("http://localhost:3010/hashtags/",{
+           method:'POST',
+         headers:{
+             "content-type":'application/json'
+         },
+         body:JSON.stringify({hashtags
+
+         })
+
+       }) */
+
+      }
+
+
+
+   
+
   
 
   handleSubmitComment = e => {
