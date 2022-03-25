@@ -8,6 +8,12 @@ import { BrowserRouter as Router,Route, Routes, Switch } from "react-router-dom"
 
 import { Checkbox} from "@material-ui/core";
 
+// import axios from 'axios'
+
+// const api = axios.create({
+//   baseURL: `http://localhost:3010`
+// })
+
 const hashtags = [
   {
     id: "1",
@@ -26,7 +32,6 @@ const hashtags = [
     display: "#time"
   }
 ];
-
 
 const users = [
   {
@@ -47,13 +52,6 @@ const users = [
   }
 ];
 
-// const comments1= [
-//   {
-//     "id": "112",
-//     "isChecked": 1,
-//     "comment": "Amit"
-//   },
-// ]
 function Datepicker(props) {
   const [value, onChange] = useState(new Date());
 
@@ -82,14 +80,14 @@ console.log("after props");
   );
 }
 
-
 class App extends React.Component {
   state = {
     comments: [],
     comment: "",
     isLoggedIn:false,
     datevalue:"",
-    isChecked:false
+    isChecked:false,
+    abc:[]
   };
 
   handleCommentChange = e => {
@@ -97,50 +95,6 @@ class App extends React.Component {
       comment: e.target.value
     });
   };
-
-//  handleSaveComment = async(e)=>{
-//          e.preventDefault();
-//          const {id,display}=hashtags;
-         
-//          console.log(hashtags);
-
-//          const red=await fetch("http://localhost:3010/hashtags",{
-//           method:'POST',
-//         headers:{
-//             "content-type":'application/json'
-//         },
-//         body:JSON.stringify({id: "45",
-//         display: "Sunil12"
-//         })
-
-//       })
-
-//       const red1=await fetch("http://localhost:3010/comments",{
-//         method:'POST',
-//       headers:{
-//           "content-type":'application/json'
-//       },
-//       body:JSON.stringify({id: "118",
-//       isChecked: 0,
-//       comment: "Ankit #Football"
-//       })
-
-//     })
-
-
-         /*  const res=await fetch("http://localhost:3010/hashtags/",{
-           method:'POST',
-         headers:{
-             "content-type":'application/json'
-         },
-         body:JSON.stringify({hashtags
-
-         })
-
-       }) */
-
-      // }
-
 
   handleSubmitComment = e => {
         e.preventDefault();
@@ -164,11 +118,13 @@ class App extends React.Component {
 
           replace(/[\(\)']+/g,'')],
 
-          comment: this.state.comment.replace(/@/g,"").
+          // comment: this.state.comment.replace(/@/g,"").
 
-                  replace(/[\[\]']+/g,'').replace(/[0-9]/g,"").
+          //         replace(/[\[\]']+/g,'').replace(/[0-9]/g,"").
 
-                  replace(/[\(\)']+/g,''),
+          //         replace(/[\(\)']+/g,''),
+          comment:"",
+
           isChecked:false
         });
       }
@@ -176,7 +132,7 @@ class App extends React.Component {
       else{
         this.setState({
           comments: [...this.state.comments, this.state.comment],
-          comment: this.state.comment,
+          comment: "",
           
         });
 
@@ -208,51 +164,140 @@ class App extends React.Component {
     });    
   }
 
+  fetch = async(e)=>{
+    fetch('http://localhost:3010/comments')
+            .then(response => {
+              return response.json();
+            }).then(result => {
+              this.setState({
+                abc:result
+              });
+            });
+        console.log(this.state.abc);
+        
+  }
+
   handleSaveComment = async(e) => {
-      
-          const res=await fetch("http://localhost:3010/comments",{
-            method:'POST',
-          headers:{
-              "content-type":'application/json'
-          },
-          body:JSON.stringify(
-            {comment:this.state.comment, isChecked:this.state.isChecked}
-            )
-        })
-        const data=await res.json();
-        console.log(data);
-      
+
+    function uuidv4() {
+      return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+      );
+    }
+    console.log(uuidv4());
+    var uid= uuidv4();
+     
+          fetch('http://localhost:3010/comments')
+            .then(response => {
+              return response.json();
+            }).then(result => {
+              this.setState({
+                abc:result
+              });
+            });
+           console.log(this.state.abc);
+            let allComments = (this.state.abc);
+              console.log(allComments);
+            var l=allComments.length
+              console.log(l);
+            console.log(allComments.map((c)=>c.comment));
+            
+            // var c=allComments.map((c)=>c.comment)
+            // var is=allComments.map((is)=>is.isChecked)
+            //console.log(is);
+//---
+            for(var i = 0; i < l; i++){
+              console.log(allComments[i].comment);//a,b,ab
+              console.log(this.state.comment);//ab
+this.fetch();
+              //var count=0
+              if( allComments[i].comment == this.state.comment ){
+                 // count=allComments[i].id;
+                  //console.log(count);
+              //}
+            //}  
+              
+            //if( count > 0 )
+              //{
+                console.log("if enters");
+              
+                const res=await fetch(`http://localhost:3010/comments/${allComments[i].id}`,{
+                  method:'PUT',
+                  headers:{
+                      "content-type":'application/json'
+                  },
+                  body:JSON.stringify(
+                  {
+                    comment:this.state.comment, 
+                    isChecked:this.state.isChecked,
+                    id:uid
+                  }
+                  )
+                })     
+               // this.fetch();//updates the comment collection when we clik save btn each time          
+              }
+          
+              else
+              {
+                console.log("else inters");
+                const res=await fetch(`http://localhost:3010/comments`,{
+                  method:'POST',
+                  headers:{
+                      "content-type":'application/json'
+                  },
+                  body:JSON.stringify(
+                  {
+                    comment:this.state.comment, 
+                    isChecked:this.state.isChecked,
+                    id:uid
+                  }
+                  )
+                })
+                const comment=await res.json();
+                console.log(comment);
+                //this.fetch();//updates the comment collection when we clik save btn each time
+              
+        //-----     
 
     const commentData = this.state.comment;
     let extractHashtag = commentData.match(/#[a-z]+/gi);
 
+    if( !extractHashtag ) return false;
+
+    let hTag = extractHashtag.toString();
+
+
     //console.log(extractHashtag);
-      
-        const resp=await fetch("http://localhost:3010/hashtags" ,{
-          method:'POST',
+    //console.log(extractHashtag.toString());
+  
+   //const data = require('./db.json');
+
+    const resp=await fetch("http://localhost:3010/hashtags" ,{
+        method:'POST',
         headers:{
             "content-type":'application/json'
         },
-        body:JSON.stringify({extractHashtag: extractHashtag})
+        body:JSON.stringify({value : hTag})
 
         })
-        const hashTag=await resp.json();
-        console.log(hashTag);
+    const hashTag=await resp.json();
+    console.log(hashTag);
+  }
+  console.log(allComments.map((c)=>c.comment));
+}
       
-
-    //console.log(this.state.isChecked);
- 
   }
 
   handleCheckbox = e =>{
     console.log(this.state.isChecked);
     this.setState({ 
       isChecked : true
-     },() => {console.log(this.state.isChecked);});
+     },() => {console.log(this.state.isChecked);})
   }
 
   componentDidMount() {
     this.handleCheckbox();
+    this.fetch();
   }
 
   componentWillUnmount(){
@@ -260,11 +305,12 @@ class App extends React.Component {
       isChecked :false
     },() => {console.log(this.state.isChecked);});
   }
-//-------
+
   render() {
     const { comments, comment } = this.state;
+
     return (
-      <div>
+      <div className="container">
               <Router>
                   <div>
                   {/* <h1>Welcome to routing</h1>
@@ -280,31 +326,7 @@ class App extends React.Component {
                   </div>
                 </Router>
 
-                {/* <span>
-
-                {comments.map(comment => <b><p>{comment.replace("#time",this.state.datevalue)}</p></b>)} 
-                
-                </span>
-                
-                {this.state.isLoggedIn ? <Datepicker abc={this.handleDateSubmit}/> : ""}
-                
-                <hr />
-                <MentionsInput
-                  markup="@[__display__](__id__)"
-                  value={comment}
-                  onChange={this.handleCommentChange}
-                > 
-                  
-                  <Mention trigger="#" data={hashtags} />
-
-                  <Mention trigger="@" data={users}/>
-                
-                </MentionsInput>
-
-                <button onClick={this.handleSubmitComment}>Comment</button>
-                <button onClick={this.handleSaveComment}>Save</button>       */}
-
-          
+        
           <span>
             {comments.map((comment) => (
 
@@ -321,22 +343,26 @@ class App extends React.Component {
         
           {this.state.isLoggedIn ? <Datepicker abc={this.handleDateSubmit}/> : ""}
         
+        
           <hr />
           <MentionsInput
             markup="@[__display__](__id__)"
             value={comment}
             onChange={this.handleCommentChange}
+            required={true}
+            placeholder={"start commenting..!!"}
           > 
-            
             <Mention trigger="#" data={hashtags} />
-
-            <Mention trigger="@" data={users}/>
-          
+            <Mention trigger="@" data={users}/> 
           </MentionsInput>
-
-          <button onClick={this.handleSubmitComment}>Comment</button> 
-          <button onClick={this.handleSaveComment}>SAVE</button>
-
+         
+          <button type="button" className="btn btn-outline-warning btn-md" onClick={this.handleSubmitComment}>Comment</button> 
+          <button type="button" className="btn btn-outline-success btn-md" onClick={this.handleSaveComment}>Save</button>
+            <br/><br/>
+          <div>
+          <h4>Comments List</h4>
+          { this.state.abc.map((c) => '  '+ c.comment +'  '+',' )} 
+        </div>
                 {/* <div></div>
                 <br/>
                 <br/>

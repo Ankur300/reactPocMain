@@ -1,178 +1,25 @@
 {
   "hashtags": [
     {
-      "extractHashtag": [
-        "#indianArmy"
-      ],
+      "value": "#india",
       "id": 1
-    },
-    {
-      "extractHashtag": [
-        "#indianArmy",
-        "#indianCricket"
-      ],
-      "id": 2
-    },
-    {
-      "extractHashtag": [
-        "#holi"
-      ],
-      "id": 3
-    },
-    {
-      "extractHashtag": [
-        "#holi"
-      ],
-      "id": 4
-    },
-    {
-      "extractHashtag": [
-        "#cvk"
-      ],
-      "id": 5
-    },
-    {
-      "extractHashtag": [
-        "#cvk"
-      ],
-      "id": 6
-    },
-    {
-      "extractHashtag": [
-        "#Time"
-      ],
-      "id": 7
-    },
-    {
-      "extractHashtag": [
-        "#india"
-      ],
-      "id": 8
-    },
-    {
-      "extractHashtag": [
-        "#react"
-      ],
-      "id": 9
-    },
-    {
-      "extractHashtag": [
-        "#dhoni"
-      ],
-      "id": 11
-    },
-    {
-      "extractHashtag": [
-        "#rahulDravid"
-      ],
-      "id": 12
-    },
-    {
-      "extractHashtag": [
-        "#great"
-      ],
-      "id": 13
-    },
-    {
-      "extractHashtag": [
-        "#great"
-      ],
-      "id": 14
-    }
-  ],
-  "users": [
-    {
-      "id": "1",
-      "display": "Amit"
-    },
-    {
-      "id": "2",
-      "display": "Deepak"
-    },
-    {
-      "id": "3",
-      "display": "Rohan"
-    },
-    {
-      "id": "4",
-      "display": "Sunil"
     }
   ],
   "comments": [
     {
-      "comment": "india is great",
-      "isChecked": true,
-      "id": 1
-    },
-    {
-      "comment": "dd",
+      "comment": "messi1",
       "isChecked": false,
-      "id": 2
+      "id": "4407b2eb-aa36-4ce0-8830-1f3023d7734c"
     },
     {
-      "comment": "royals",
+      "comment": "rcb1",
       "isChecked": true,
-      "id": 3
+      "id": "fec0eefd-04fa-40cb-ad97-4ba5cdc28d56"
     },
     {
-      "comment": "mi",
-      "isChecked": true,
-      "id": 4
-    },
-    {
-      "comment": "mumbai",
-      "isChecked": true,
-      "id": 5
-    },
-    {
-      "comment": "kxip",
+      "comment": "rahulDravid",
       "isChecked": false,
-      "id": 6
-    },
-    {
-      "comment": "kings",
-      "isChecked": true,
-      "id": 7
-    },
-    {
-      "comment": "qwe",
-      "isChecked": false,
-      "id": 8
-    },
-    {
-      "comment": "dc",
-      "isChecked": false,
-      "id": 9
-    },
-    {
-      "comment": "#Time:17 Mar 2022|07.41 PM",
-      "isChecked": false,
-      "id": 10
-    },
-    {
-      "comment": "#Time:17 Mar 2022|07.06 PM",
-      "isChecked": true,
-      "id": 11
-    },
-    {
-      "comment": "#holi celebration",
-      "isChecked": false,
-      "id": 12
-    },
-    {
-      "comment": "#india",
-      "isChecked": true,
-      "id": 13
-    },
-    {
-      "comment": "#dhoni is finisher",
-      "isChecked": true,
-      "id": 14
-    },
-    {
-      "comment": "#rahulDravid is wall",
-      "isChecked": false,
-      "id": 15
+      "id": "c44cf1d1-1c77-45c2-abc4-94743f72e0a9"
     }
   ]
 }

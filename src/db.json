@@ -1,0 +1,26 @@
+{
+  "hashtags": [
+    
+  ],
+  "users": [
+    {
+      "id": "1",
+      "display": "Amit"
+    },
+    {
+      "id": "2",
+      "display": "Deepak"
+    },
+    {
+      "id": "3",
+      "display": "Rohan"
+    },
+    {
+      "id": "4",
+      "display": "Sunil"
+    }
+  ],
+  "comments": [
+    
+  ]
+}
