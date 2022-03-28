@@ -6,13 +6,9 @@ import Linkify from "./Linkify";
 import ASearch from "./advancesearch";
 import { BrowserRouter as Router,Route, Routes, Switch } from "react-router-dom";
 
-import { Checkbox} from "@material-ui/core";
+//import { Checkbox} from "@material-ui/core";
 
-// import axios from 'axios'
 
-// const api = axios.create({
-//   baseURL: `http://localhost:3010`
-// })
 
 const hashtags = [
   {
@@ -118,12 +114,12 @@ class App extends React.Component {
 
           replace(/[\(\)']+/g,'')],
 
-          // comment: this.state.comment.replace(/@/g,"").
+          comment: this.state.comment.replace(/@/g,"").
 
-          //         replace(/[\[\]']+/g,'').replace(/[0-9]/g,"").
+                  replace(/[\[\]']+/g,'').replace(/[0-9]/g,"").
 
-          //         replace(/[\(\)']+/g,''),
-          comment:"",
+                  replace(/[\(\)']+/g,''),
+          //comment:"",
 
           isChecked:false
         });
@@ -132,11 +128,12 @@ class App extends React.Component {
       else{
         this.setState({
           comments: [...this.state.comments, this.state.comment],
-          comment: "",
+          comment: this.state.comment
           
         });
 
       }   
+      
   };
 
   handleDateSubmit=(value)=>{
@@ -178,7 +175,7 @@ class App extends React.Component {
   }
 
   handleSaveComment = async(e) => {
-
+    //random id generator
     function uuidv4() {
       return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
@@ -209,7 +206,7 @@ class App extends React.Component {
             for(var i = 0; i < l; i++){
               console.log(allComments[i].comment);//a,b,ab
               console.log(this.state.comment);//ab
-this.fetch();
+              this.fetch();
               //var count=0
               if( allComments[i].comment == this.state.comment ){
                  // count=allComments[i].id;
@@ -234,7 +231,8 @@ this.fetch();
                   }
                   )
                 })     
-               // this.fetch();//updates the comment collection when we clik save btn each time          
+                break;
+                     
               }
           
               else
@@ -255,18 +253,17 @@ this.fetch();
                 })
                 const comment=await res.json();
                 console.log(comment);
-                //this.fetch();//updates the comment collection when we clik save btn each time
+               
               
-        //-----     
-
     const commentData = this.state.comment;
+    console.log(commentData);
     let extractHashtag = commentData.match(/#[a-z]+/gi);
 
     if( !extractHashtag ) return false;
 
     let hTag = extractHashtag.toString();
 
-
+    
     //console.log(extractHashtag);
     //console.log(extractHashtag.toString());
   
@@ -282,17 +279,32 @@ this.fetch();
         })
     const hashTag=await resp.json();
     console.log(hashTag);
-  }
+
+   
+    
+  }//end else
   console.log(allComments.map((c)=>c.comment));
-}
-      
-  }
+ 
+}//end For
+
+  }//end handleSave
 
   handleCheckbox = e =>{
     console.log(this.state.isChecked);
-    this.setState({ 
-      isChecked : true
-     },() => {console.log(this.state.isChecked);})
+
+    if(this.state.isChecked == false){
+      this.setState({ 
+        isChecked : true
+      },() => {console.log(this.state.isChecked);
+      })
+    }else{
+      this.setState({ 
+        isChecked : false
+      },() => {console.log(this.state.isChecked);
+      })
+    }
+  
+      
   }
 
   componentDidMount() {
@@ -304,8 +316,13 @@ this.fetch();
     this.setState({
       isChecked :false
     },() => {console.log(this.state.isChecked);});
+
+    // this.setState({
+    //   comment:""
+    // })
   }
 
+  
   render() {
     const { comments, comment } = this.state;
 
@@ -326,15 +343,31 @@ this.fetch();
                   </div>
                 </Router>
 
-        
+        <div>
+          <h4>Tasks List</h4>
+          <div className="container">
+          { this.state.abc.map((c) => (
+            <div>
+              {(console.log(c.isChecked))}
+              {c.isChecked == false ? 
+    <input className="form-check-input" onClick={this.handleCheckbox} type="checkbox" value="" id="flexCheckDefault"></input> :
+    <input className="form-check-input" onClick={this.handleCheckbox} type="checkbox" value="" id="flexCheckChecked" defaultChecked></input> }
+              {c.comment}
+            </div>
+            ))
+          } 
+           </div>
+        </div>
+        <br/><br/>
           <span>
             {comments.map((comment) => (
 
               <div>
-                  <Checkbox
+                  {/* <Checkbox
                     onClick={this.handleCheckbox}
                     color="primary"
-                  />
+                  /> */}
+                  { <input onClick={this.handleCheckbox} type="checkbox" id="checkboxNoLabel" value=""  aria-label="..."></input>}
                   {comment.replace("#time",this.state.datevalue)}
               </div>
               ))
@@ -356,13 +389,10 @@ this.fetch();
             <Mention trigger="@" data={users}/> 
           </MentionsInput>
          
-          <button type="button" className="btn btn-outline-warning btn-md" onClick={this.handleSubmitComment}>Comment</button> 
+          <button type="button" className="btn btn-outline-warning btn-md" onClick={this.handleSubmitComment}>Add task</button> 
           <button type="button" className="btn btn-outline-success btn-md" onClick={this.handleSaveComment}>Save</button>
             <br/><br/>
-          <div>
-          <h4>Comments List</h4>
-          { this.state.abc.map((c) => '  '+ c.comment +'  '+',' )} 
-        </div>
+         
                 {/* <div></div>
                 <br/>
                 <br/>
